@@ -1,0 +1,17 @@
+# -*- makefile -*-
+
+SED          := sed
+SED_TESLA_INTERFACE := $(SED) -i 's/local.qdbuscpp2xml/com.tesla/'
+QDBUSCPP2XML := qdbuscpp2xml
+
+ALL := com.tesla.hello.xml
+
+all: $(ALL)
+
+.PHONY: clean
+clean:
+	rm -f $(ALL)
+
+com.tesla.hello.xml: hello.h
+	$(QDBUSCPP2XML) $^ -o $@
+	$(SED_TESLA_INTERFACE) $@
